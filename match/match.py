@@ -30,7 +30,7 @@ CATALOG = os.path.join(ROOT, "catalog", "programs.json")
 
 STAGES = ("idea", "pre-seed", "seed", "series-a", "series-b", "series-c", "growth")
 PARTNERS = ("none", "vc", "accelerator", "incubator", "angel_network", "university", "community")
-BUCKETS = ("no_incorporation", "incorporated", "funded_or_partner")
+BUCKETS = ("incorporated", "funded_or_partner")
 NEEDS = ("cpu", "gpu", "inference", "other")  # the catalog's covers values
 READS = ("id", "program", "provider", "bucket", "credit_max", "covers", "requirements", "max_age_years",
          "funding_rule", "link", "apply_steps", "source", "checked")
@@ -315,7 +315,6 @@ def self_test():
                 "source": "https://example.com", "checked": "2026-11-02"}
 
     catalog = {"rows": [
-        prog("open", bucket="no_incorporation"),
         prog("company"),
         prog("young", age=5),
         prog("pre-b", rule="pre-Series B", age=10),
@@ -338,7 +337,7 @@ def self_test():
         prog("select-partner", reqs=["Affiliation with a select Notion startup partner for the 6-month offer"]),
         prog("accepted-into", reqs=["Accepted into NVIDIA Inception (so incorporated)"]),
         prog("approved-partner", reqs=["Raised at least $5M from an approved Nebius VC partner"]),
-        prog("cpu-only", bucket="no_incorporation", covers=("cpu", "other")),
+        prog("cpu-only", covers=("cpu", "other")),
     ]}
     good = {"stage": "pre-seed", "funding_usd": 0, "incorporated": True, "for_profit": True, "founded_year": 2025,
             "industry": ["ai"], "location": {"country": "US", "region": "Colorado"}, "partner": {"type": "none"}}
@@ -349,22 +348,22 @@ def self_test():
     with_accelerator = dict(good, stage="seed", funding_usd=500_000, partner={"type": "accelerator", "name": "A"})
     gpu = dict(good, needs=["gpu"])
     want = {  # profile -> program -> verdict
-        "good": {"open": "yes", "company": "yes", "young": "yes", "pre-b": "yes", "for-profit": "yes",
+        "good": {"company": "yes", "young": "yes", "pre-b": "yes", "for-profit": "yes",
                  "nonprofit-ok": "check", "ai-only": "yes", "place": "check", "vc-network": "no", "code": "no",
                  "invite": "check", "raised-1m": "no", "series": "no", "no-equity": "yes", "mystery": "check",
                  "funded-pre-b": "no", "selective": "check", "history": "yes", "invites": "check",
                  "reviews": "check", "select-partner": "check", "accepted-into": "check", "approved-partner": "check",
                  "cpu-only": "yes"},
-        "bad": {"open": "yes", "company": "no", "young": "no", "pre-b": "no", "for-profit": "no",
+        "bad": {"company": "no", "young": "no", "pre-b": "no", "for-profit": "no",
                 "nonprofit-ok": "no", "ai-only": "no", "place": "no", "vc-network": "no", "code": "no",
                 "invite": "check", "raised-1m": "no", "series": "check", "no-equity": "no", "mystery": "no",
                 "funded-pre-b": "no"},
-        "blank": {"open": "yes", "company": "check", "young": "check", "pre-b": "check", "for-profit": "check",
+        "blank": {"company": "check", "young": "check", "pre-b": "check", "for-profit": "check",
                   "code": "no", "raised-1m": "check", "no-equity": "check", "funded-pre-b": "check"},
         "with_vc": {"vc-network": "check", "code": "check", "raised-1m": "check", "series": "check",
                     "pre-b": "yes", "no-equity": "no", "funded-pre-b": "check"},
         "with_accelerator": {"vc-network": "check", "code": "check", "funded-pre-b": "check"},
-        "gpu": {"open": "yes", "cpu-only": "no"},
+        "gpu": {"company": "yes", "cpu-only": "no"},
     }
     profiles = {"good": good, "bad": bad, "blank": blank, "with_vc": with_vc, "with_accelerator": with_accelerator,
                 "gpu": gpu}

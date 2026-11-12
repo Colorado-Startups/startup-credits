@@ -13,31 +13,22 @@ November 12, 2026. Every amount and rule below comes from the provider's own pag
 | 5 | Cloudflare for Startups, Tier 3 | $10,000 for 12 months | Under $1M raised and a company email domain | `cloudflare-tier3` |
 | 6 | AWS Activate | $1,000, with up to $5,000 for select participants | A Paid Tier AWS account; not past Series A | `aws-activate` |
 
-The catalog lists 53 programs. Run [`match/match.py`](../match/README.md) with your own profile for the full short list.
+The catalog lists 45 programs. Run [`match/match.py`](../match/README.md) with your own profile for the full short list.
 
 ## Before you apply
 
 | Do this | Why, per the provider's page |
 |---|---|
 | Use an email on your company's domain | AWS Activate, Cloudflare and Baseten refuse free email providers |
-| Open a new Microsoft account for Microsoft for Startups | A Microsoft account used for the Azure Free Trial cannot get Microsoft for Startups credits (`azure-free`) |
+| Open a new Microsoft account for Microsoft for Startups | Microsoft for Startups needs a new personal Microsoft account with no prior Azure offer, so an Azure free account login does not qualify (`microsoft`) |
 | Apply for Kiro before AWS Activate if you want both | Kiro startup credits exclude startups with active Activate Credits (`aws-activate`) |
-| Know that the AWS Free plan blocks Activate | A Free plan account cannot receive other promotional credits until it upgrades to the Paid plan (`aws-free-plan`) |
-| Skip the Baseten $250 credit if you want the startup program | The Baseten AI Startup Program only enrolls companies that never received Baseten credits (`baseten-250`) |
+| Know that the AWS Free plan blocks Activate | A Free plan account is not eligible for promotional credits; a Paid plan account is (`aws-free-plan` in compute-credits) |
+| Skip the Baseten $250 credit if you want the startup program | The Baseten AI Startup Program only enrolls net new customers that never received Baseten credits (`baseten-startup`) |
 | Activate Microsoft credits in time | Microsoft says credits must be activated within 90 days of accepting the agreement, with no extensions (`microsoft`) |
 
 ## No company yet
 
-These need no registered company, per each provider's page.
-
-| Program | Amount | Card | Past the credit | id |
-|---|---|---|---|---|
-| AWS Free plan | $100 at sign-up plus up to $100 for console activities | Not needed for most new customers | Stops; the account suspends when the plan ends | `aws-free-plan` |
-| Azure free account | $200 for 30 days | Needed | Stops unless you move to pay as you go | `azure-free` |
-| Oracle Cloud Free Trial | US$300 for 30 days | Needed | Stops; paid resources are reclaimed | `oracle-trial` |
-| AMD Developer Cloud | $100 of MI300X time for 30 days | Optional | Bills if a card is on file | `amd-dev-cloud` |
-| Modal Starter plan | $30 of compute each month | Needed | Bills automatically | `modal-free` |
-| Deepgram Startup Program | $1,000, rising to tiers worth up to $100,000 | Not stated | Not stated | `deepgram` |
+Credits anyone can get with no company, such as the AWS Free plan, the Azure free account, the Oracle Cloud Free Trial, AMD Developer Cloud, Modal Starter and Deepgram, are in [Colorado-Compute/compute-credits](https://github.com/Colorado-Compute/compute-credits). Each row there has its amount, its card rule and what happens past the credit.
 
 ## Once you are incorporated
 
@@ -71,7 +62,6 @@ Most programs put a card on file and bill you once the credit runs out. The cata
 |---|---|
 | [AWS](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-controls.html) | AWS Budgets actions can apply an IAM policy or a service control policy, or target specific EC2 or RDS instances, when a budget is crossed. They run automatically or after your approval |
 | [Azure](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/spending-limit) | Free accounts have the spending limit on by default. At the limit, Azure disables your services for the rest of the billing period. You remove the limit only by upgrading to pay as you go |
-| AMD Developer Cloud | With no card on file, the GPU VM and its data are destroyed when the credit ends. A powered-off VM still uses credit until you destroy it |
 | Cloudflare | After the credits expire, Cloudflare bills the card on file |
 
 Set a budget alert on day one with every provider that holds your card.

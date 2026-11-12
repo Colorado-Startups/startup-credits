@@ -26,7 +26,7 @@ ROW_FIELDS = ("id", "program", "provider", "bucket", "credit_first", "credit_fir
               "credit_max_computed", "amount_note", "covers", "requirements", "max_age_years", "funding_rule",
               "term", "traps", "link", "source", "checked", "apply_steps")
 TRAP_FIELDS = ("card_required", "expiry", "overage", "trains_on_data", "other")
-BUCKETS = ("no_incorporation", "incorporated", "funded_or_partner")
+BUCKETS = ("incorporated", "funded_or_partner")
 COVERS = {"cpu", "gpu", "inference", "other"}
 OVERAGE = {"bills", "stops", "unknown", None}
 ID = re.compile(r"^[a-z0-9][a-z0-9-]*$")
@@ -260,6 +260,7 @@ def self_test():
         ("a private top-level key is refused", env([good], cs_summary="x"), True),
         ("a missing field is refused", env([without("apply_steps")]), True),
         ("a bad bucket fails", env([v(bucket="seed")]), True),
+        ("a no_incorporation row fails: those live in compute-credits", env([v(bucket="no_incorporation")]), True),
         ("a string amount fails", env([v(credit_max="$5,000")]), True),
         ("a first amount above the max fails", env([v(credit_first=9000)]), True),
         ("a missing computed flag fails", env([without("credit_max_computed")]), True),
@@ -291,7 +292,7 @@ def self_test():
         print(f"self-test: {'ok   ' if ok else 'WRONG'} {name}")
     with tempfile.TemporaryDirectory() as d:
         p = os.path.join(d, "programs.json")
-        doc = env([v(id="p2", provider="Zed"), v(id="p0", provider="Ace", bucket="no_incorporation"), good])
+        doc = env([v(id="p2", provider="Ace", bucket="funded_or_partner"), v(id="p0", provider="Ace"), good])
         with open(p, "w", encoding="utf-8") as f:
             json.dump(doc, f)
         unsorted = bool(run(p))

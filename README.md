@@ -2,7 +2,9 @@
 
 Find your credits, then apply.
 
-This repository lists 53 free startup credit programs for compute, GPUs, inference and software. Each program shows who qualifies, the amount, a first-party apply link and the steps. Every row was read on the provider's own page on its `checked` date. A program closes or changes without notice, so read its source page before you apply.
+This repository lists 45 free startup credit programs for compute, GPUs, inference and software. Each program shows who qualifies, the amount, a first-party apply link and the steps. Every row was read on the provider's own page on its `checked` date. A program closes or changes without notice, so read its source page before you apply.
+
+Credits anyone can get, with no company needed (cloud trials and free tiers), are in [Colorado-Compute/compute-credits](https://github.com/Colorado-Compute/compute-credits).
 
 | Step | Do this |
 |---|---|
@@ -16,17 +18,16 @@ No Python? Read [the founder guide](guides/free-gpu-credits-for-founders.md), or
 
 | Path | What it is |
 |---|---|
-| [`catalog/`](catalog/README.md) | `programs.json`, the 53 programs, and `check.py`, which guards every field |
+| [`catalog/`](catalog/README.md) | `programs.json`, the 45 programs, and `check.py`, which guards every field |
 | [`match/`](match/README.md) | The matcher: your profile in, a short list out, each program with its apply steps |
 | [`guides/`](guides/free-gpu-credits-for-founders.md) | The founder guide: which programs to apply for first, and how to avoid a surprise bill |
 | [`program/DESIGN.md`](program/DESIGN.md) | The design of the Colorado Startups Accelerator Program, a free, non-equity cohort (not running yet) |
 | `tools/` | The repository's text checks and its secret scan |
 
-## The three buckets
+## The two buckets
 
 | Bucket | Means | Programs |
 |---|---|---|
-| `no_incorporation` | Anyone may sign up; no company needed | 8 |
 | `incorporated` | Needs a registered company | 27 |
 | `funded_or_partner` | Needs outside funding, an investor or accelerator code, or an invitation | 18 |
 
