@@ -1,0 +1,12 @@
+[
+  {
+    "id": "docs.dead_paths",
+    "params": {
+      "areas": [
+        {"doc": "guides/free-gpu-credits-for-founders.md", "area": ["catalog/programs.json"]},
+        {"doc": "program/DESIGN.md", "area": ["catalog/programs.json", "match/match.py"]},
+        {"doc": "**", "area": ["{dir}/"]}
+      ]
+    }
+  }
+]

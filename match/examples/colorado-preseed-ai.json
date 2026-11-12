@@ -1,0 +1,23 @@
+{
+  "about": "Example only: a made-up Colorado company, incorporated, pre-seed, building an AI product, no investor yet.",
+  "stage": "pre-seed",
+  "funding_usd": 0,
+  "incorporated": true,
+  "for_profit": true,
+  "founded_year": 2025,
+  "industry": [
+    "ai"
+  ],
+  "needs": [
+    "gpu",
+    "inference"
+  ],
+  "location": {
+    "country": "US",
+    "region": "Colorado"
+  },
+  "partner": {
+    "type": "none",
+    "name": null
+  }
+}

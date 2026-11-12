@@ -1,0 +1,10 @@
+# Dependabot bumps every action pin, the Git Crafter pins included, once a week in one pull request.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
