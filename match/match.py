@@ -256,10 +256,16 @@ def match(catalog, profile, year):
     return out
 
 
-def report(results, catalog_checked):
+NO_COMPANY = ("No company yet? Credits that need no company are in "
+              "https://github.com/Colorado-Compute/compute-credits")
+
+
+def report(results, catalog_checked, incorporated=None):
     """The short list: programs to apply for (yes), then ones to confirm (check), each with its steps and link.
-    Programs that do not qualify are named on one line each, with the first reason."""
-    lines = [f"Programs from the catalog checked {catalog_checked}. Amounts are the published ceilings, as each "
+    Programs that do not qualify are named on one line each, with the first reason. A profile that is not
+    incorporated, or leaves it blank, first gets the pointer to compute-credits, where the no-company credits live."""
+    lines = [NO_COMPANY] if incorporated is not True else []
+    lines += [f"Programs from the catalog checked {catalog_checked}. Amounts are the published ceilings, as each "
              "source page states them. Meeting the rules is not acceptance: each provider decides.", ""]
     titles = {"yes": "Apply: you meet every stated rule", "check": "Confirm first, then apply"}
     for verdict in ("yes", "check"):
@@ -382,7 +388,11 @@ def self_test():
                   and any("needs a select Notion startup partner" in w for w in got["select-partner"]["reasons"])))
     cases.append(("every result carries the apply link and steps",
                   all(r["apply_link"] and r["apply_steps"] for r in got.values())))
-    text = report(match(catalog, gpu, year), "2026-11-02")
+    text = report(match(catalog, gpu, year), "2026-11-02", gpu["incorporated"])
+    cases.append(("an incorporated profile gets no compute-credits pointer", NO_COMPANY not in text))
+    for name, inc in (("not incorporated", False), ("blank incorporated", None)):
+        first = report(match(catalog, dict(good, incorporated=inc), year), "2026-11-02", inc).split("\n")[0]
+        cases.append((f"a {name} profile's short list opens with the compute-credits pointer", first == NO_COMPANY))
     cases.append(("the short list prints numbered steps and the apply link",
                   "    1. Read the page." in text and "apply: https://example.com/apply" in text))
     cases.append(("the short list names a non-match on one line with its reason",
@@ -438,8 +448,10 @@ def main(argv):
             return 1 if out else 0
         if len(args) in (1, 2) and not args[0].startswith("--") and args[1:] in ([], ["--json"]):
             catalog = load_json(CATALOG, "catalog")
-            results = match(catalog, load_json(args[0], "profile"), datetime.date.today().year)
-            print(json.dumps(results, indent=2) if args[1:] else report(results, catalog.get("checked")), end="")
+            profile = load_json(args[0], "profile")
+            results = match(catalog, profile, datetime.date.today().year)
+            print(json.dumps(results, indent=2) if args[1:]
+                  else report(results, catalog.get("checked"), profile.get("incorporated")), end="")
             if args[1:]:
                 print()
             return 0
