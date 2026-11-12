@@ -1,0 +1,21 @@
+{
+ "comment": "Quality, Speed and Consumption config (Git Crafter quality/CONFIG.md). Tabs this repo has no use for are dropped: no projects board, design, usability, desktop app or deploy.",
+ "tabs": [
+  "code",
+  "documentation",
+  "issues",
+  "pull-requests",
+  "actions",
+  "tests",
+  "security",
+  "insights",
+  "settings",
+  "tools",
+  "credits",
+  "claude",
+  "claude-settings",
+  "blockers",
+  "tokens",
+  "instructions"
+ ]
+}

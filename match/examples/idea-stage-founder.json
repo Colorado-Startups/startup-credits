@@ -1,0 +1,18 @@
+{
+  "about": "Example only: one founder with an idea, no company yet, nothing raised.",
+  "stage": "idea",
+  "funding_usd": 0,
+  "incorporated": false,
+  "for_profit": null,
+  "founded_year": null,
+  "industry": [],
+  "needs": [],
+  "location": {
+    "country": "US",
+    "region": "Colorado"
+  },
+  "partner": {
+    "type": "none",
+    "name": null
+  }
+}

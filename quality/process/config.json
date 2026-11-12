@@ -1,0 +1,60 @@
+{
+ "comment": "Process page config and the repo's maps file (Git Crafter actions/pages/action.yml; maps: pages/maps/README.md). No deploy map: this repo ships no deployment.",
+ "repos": [
+  "startup-credits"
+ ],
+ "docs": {
+  "maps": "quality/process/config.json"
+ },
+ "repo_url": "https://github.com/Colorado-Startups/startup-credits/blob/main",
+ "maps": [
+  {
+   "use": "delivery"
+  },
+  {
+   "use": "guard"
+  },
+  {
+   "use": "adopt"
+  },
+  {
+   "use": "measure"
+  },
+  {
+   "use": "code"
+  },
+  {
+   "use": "triage"
+  },
+  {
+   "use": "secure"
+  }
+ ],
+ "data": "quality/process/data/org.json",
+ "history": null,
+ "out": "quality/dist",
+ "pages": {
+  "process": "process.html"
+ },
+ "tabs": [
+  "build",
+  "ci",
+  "testing",
+  "claude",
+  "tokens"
+ ],
+ "heading": "startup-credits",
+ "collector": "Git Crafter actions/pages",
+ "nav": [
+  {
+   "href": "index.html",
+   "label": "Quality, Speed and Consumption",
+   "icon": "speed"
+  },
+  {
+   "page": "process",
+   "label": "Process",
+   "icon": "plan"
+  }
+ ]
+}
