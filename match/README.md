@@ -32,6 +32,8 @@ Leave a field `null` when you do not know it. The matcher then says "confirm" in
 | Confirm first, then apply | `check` | Nothing fails, but a quoted requirement needs a person: an invitation, a review, a partner network, a country list, an industry, or a blank profile field |
 | Not a match | `no` | A rule the profile decides fails. One line names it |
 
+When the profile's `incorporated` is `false` or blank, the short list opens with a pointer to [Colorado-Compute/compute-credits](https://github.com/Colorado-Compute/compute-credits), where credits that need no company live.
+
 The matcher reads `bucket`, `funding_rule`, `max_age_years` and `covers` as rules. It reads `requirements` text only to flag lines for a person. It never turns free text into a "no", with one exception: "for-profit" or "not a nonprofit" against a profile that says `for_profit: false`.
 
 ## Checks

@@ -13,7 +13,7 @@
 |---|---|
 | `id` | A slug, unique |
 | `program`, `provider` | The names the provider's page uses |
-| `bucket` | `no_incorporation` (anyone), `incorporated` (needs a registered company) or `funded_or_partner` (needs outside funding, an investor or accelerator code, or an invitation) |
+| `bucket` | `incorporated` (needs a registered company) or `funded_or_partner` (needs outside funding, an investor or accelerator code, or an invitation) |
 | `credit_first`, `credit_max` | US dollars at sign-up and at most, or `null` when the page states none. A `_computed` flag is `true` when the number is added up here, and then `amount_note` says "(computed here)" |
 | `amount_note` | The amount in the page's terms |
 | `covers` | What the credits pay for: `cpu`, `gpu`, `inference`, `other` |
@@ -28,7 +28,7 @@
 
 ## What stays out
 
-A program is left out when its page says it is closed, when its page cannot be read, when the page does not confirm the program or its amount, or by Colorado Startups policy. Application drafts, partner tracks, account records and any `cs_*` or `evidence` field stay in a private repository. `check.py` and `tools/checks.py` refuse them here.
+A program anyone may join with no company lives in [Colorado-Compute/compute-credits](https://github.com/Colorado-Compute/compute-credits), not here. A program is left out when its page says it is closed, when its page cannot be read, when the page does not confirm the program or its amount, or by Colorado Startups policy. Application drafts, partner tracks, account records and any `cs_*` or `evidence` field stay in a private repository. `check.py` and `tools/checks.py` refuse them here.
 
 ## Commands
 

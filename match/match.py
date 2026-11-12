@@ -30,7 +30,7 @@ CATALOG = os.path.join(ROOT, "catalog", "programs.json")
 
 STAGES = ("idea", "pre-seed", "seed", "series-a", "series-b", "series-c", "growth")
 PARTNERS = ("none", "vc", "accelerator", "incubator", "angel_network", "university", "community")
-BUCKETS = ("no_incorporation", "incorporated", "funded_or_partner")
+BUCKETS = ("incorporated", "funded_or_partner")
 NEEDS = ("cpu", "gpu", "inference", "other")  # the catalog's covers values
 READS = ("id", "program", "provider", "bucket", "credit_max", "covers", "requirements", "max_age_years",
          "funding_rule", "link", "apply_steps", "source", "checked")
@@ -256,10 +256,16 @@ def match(catalog, profile, year):
     return out
 
 
-def report(results, catalog_checked):
+NO_COMPANY = ("No company yet? Credits that need no company are in "
+              "https://github.com/Colorado-Compute/compute-credits")
+
+
+def report(results, catalog_checked, incorporated=None):
     """The short list: programs to apply for (yes), then ones to confirm (check), each with its steps and link.
-    Programs that do not qualify are named on one line each, with the first reason."""
-    lines = [f"Programs from the catalog checked {catalog_checked}. Amounts are the published ceilings, as each "
+    Programs that do not qualify are named on one line each, with the first reason. A profile that is not
+    incorporated, or leaves it blank, first gets the pointer to compute-credits, where the no-company credits live."""
+    lines = [NO_COMPANY] if incorporated is not True else []
+    lines += [f"Programs from the catalog checked {catalog_checked}. Amounts are the published ceilings, as each "
              "source page states them. Meeting the rules is not acceptance: each provider decides.", ""]
     titles = {"yes": "Apply: you meet every stated rule", "check": "Confirm first, then apply"}
     for verdict in ("yes", "check"):
@@ -315,7 +321,6 @@ def self_test():
                 "source": "https://example.com", "checked": "2026-11-02"}
 
     catalog = {"rows": [
-        prog("open", bucket="no_incorporation"),
         prog("company"),
         prog("young", age=5),
         prog("pre-b", rule="pre-Series B", age=10),
@@ -338,7 +343,7 @@ def self_test():
         prog("select-partner", reqs=["Affiliation with a select Notion startup partner for the 6-month offer"]),
         prog("accepted-into", reqs=["Accepted into NVIDIA Inception (so incorporated)"]),
         prog("approved-partner", reqs=["Raised at least $5M from an approved Nebius VC partner"]),
-        prog("cpu-only", bucket="no_incorporation", covers=("cpu", "other")),
+        prog("cpu-only", covers=("cpu", "other")),
     ]}
     good = {"stage": "pre-seed", "funding_usd": 0, "incorporated": True, "for_profit": True, "founded_year": 2025,
             "industry": ["ai"], "location": {"country": "US", "region": "Colorado"}, "partner": {"type": "none"}}
@@ -349,22 +354,22 @@ def self_test():
     with_accelerator = dict(good, stage="seed", funding_usd=500_000, partner={"type": "accelerator", "name": "A"})
     gpu = dict(good, needs=["gpu"])
     want = {  # profile -> program -> verdict
-        "good": {"open": "yes", "company": "yes", "young": "yes", "pre-b": "yes", "for-profit": "yes",
+        "good": {"company": "yes", "young": "yes", "pre-b": "yes", "for-profit": "yes",
                  "nonprofit-ok": "check", "ai-only": "yes", "place": "check", "vc-network": "no", "code": "no",
                  "invite": "check", "raised-1m": "no", "series": "no", "no-equity": "yes", "mystery": "check",
                  "funded-pre-b": "no", "selective": "check", "history": "yes", "invites": "check",
                  "reviews": "check", "select-partner": "check", "accepted-into": "check", "approved-partner": "check",
                  "cpu-only": "yes"},
-        "bad": {"open": "yes", "company": "no", "young": "no", "pre-b": "no", "for-profit": "no",
+        "bad": {"company": "no", "young": "no", "pre-b": "no", "for-profit": "no",
                 "nonprofit-ok": "no", "ai-only": "no", "place": "no", "vc-network": "no", "code": "no",
                 "invite": "check", "raised-1m": "no", "series": "check", "no-equity": "no", "mystery": "no",
                 "funded-pre-b": "no"},
-        "blank": {"open": "yes", "company": "check", "young": "check", "pre-b": "check", "for-profit": "check",
+        "blank": {"company": "check", "young": "check", "pre-b": "check", "for-profit": "check",
                   "code": "no", "raised-1m": "check", "no-equity": "check", "funded-pre-b": "check"},
         "with_vc": {"vc-network": "check", "code": "check", "raised-1m": "check", "series": "check",
                     "pre-b": "yes", "no-equity": "no", "funded-pre-b": "check"},
         "with_accelerator": {"vc-network": "check", "code": "check", "funded-pre-b": "check"},
-        "gpu": {"open": "yes", "cpu-only": "no"},
+        "gpu": {"company": "yes", "cpu-only": "no"},
     }
     profiles = {"good": good, "bad": bad, "blank": blank, "with_vc": with_vc, "with_accelerator": with_accelerator,
                 "gpu": gpu}
@@ -383,7 +388,11 @@ def self_test():
                   and any("needs a select Notion startup partner" in w for w in got["select-partner"]["reasons"])))
     cases.append(("every result carries the apply link and steps",
                   all(r["apply_link"] and r["apply_steps"] for r in got.values())))
-    text = report(match(catalog, gpu, year), "2026-11-02")
+    text = report(match(catalog, gpu, year), "2026-11-02", gpu["incorporated"])
+    cases.append(("an incorporated profile gets no compute-credits pointer", NO_COMPANY not in text))
+    for name, inc in (("not incorporated", False), ("blank incorporated", None)):
+        first = report(match(catalog, dict(good, incorporated=inc), year), "2026-11-02", inc).split("\n")[0]
+        cases.append((f"a {name} profile's short list opens with the compute-credits pointer", first == NO_COMPANY))
     cases.append(("the short list prints numbered steps and the apply link",
                   "    1. Read the page." in text and "apply: https://example.com/apply" in text))
     cases.append(("the short list names a non-match on one line with its reason",
@@ -439,8 +448,10 @@ def main(argv):
             return 1 if out else 0
         if len(args) in (1, 2) and not args[0].startswith("--") and args[1:] in ([], ["--json"]):
             catalog = load_json(CATALOG, "catalog")
-            results = match(catalog, load_json(args[0], "profile"), datetime.date.today().year)
-            print(json.dumps(results, indent=2) if args[1:] else report(results, catalog.get("checked")), end="")
+            profile = load_json(args[0], "profile")
+            results = match(catalog, profile, datetime.date.today().year)
+            print(json.dumps(results, indent=2) if args[1:]
+                  else report(results, catalog.get("checked"), profile.get("incorporated")), end="")
             if args[1:]:
                 print()
             return 0
