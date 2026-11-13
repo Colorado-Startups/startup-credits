@@ -37,4 +37,8 @@ Counts are from `catalog/programs.json`, checked 2026-11-12.
 
 Open a pull request that edits `catalog/programs.json`. Update the row's `source` and `checked` to the page you read today. Run `python3 -I catalog/check.py --fix` to write the canonical layout, then `python3 -I catalog/check.py`. CI runs every check on the pull request. Sign off each commit with `git commit -s`.
 
-Colorado Startups publishes this list for founders; it is not a partner of any provider listed, and no provider paid to appear. MIT license.
+Colorado Startups publishes this list for founders; it is not a partner of any provider listed, and no provider paid to appear.
+
+## License
+
+Everything Colorado Startups wrote here is dedicated to the public domain under [CC0 1.0](LICENSE). Use it for anything, with no credit needed. The code (`tools/`, `match/match.py`, `catalog/check.py`, `.github/workflows/`) is also offered under [0BSD](LICENSES/0BSD.txt), whichever you prefer. Your contribution comes in under the same terms. Provider names and marks belong to their owners.
