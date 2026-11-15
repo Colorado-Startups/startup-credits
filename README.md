@@ -2,6 +2,8 @@
 
 Find your credits, then apply.
 
+Brand: [Colorado Startups brand guide](https://colorado-startups.github.io/brand/)
+
 This repository lists 45 free startup credit programs for compute, GPUs, inference and software. Each program shows who qualifies, the amount, a first-party apply link and the steps. Every row was read on the provider's own page on its `checked` date. A program closes or changes without notice, so read its source page before you apply.
 
 Credits anyone can get, with no company needed (cloud trials and free tiers), are in [Colorado-Compute/compute-credits](https://github.com/Colorado-Compute/compute-credits).
