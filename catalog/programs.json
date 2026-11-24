@@ -1,7 +1,7 @@
 {
  "version": 1,
  "about": "Startup credit programs a founder can apply to. Each row was read on the provider's own page on its checked date, and link is where the application or sign-up starts. Programs change: read the source page before you apply. Edit this file by pull request; catalog/check.py guards it.",
- "checked": "2026-11-12",
+ "checked": "2026-11-24",
  "buckets": [
   "incorporated",
   "funded_or_partner"
@@ -1527,6 +1527,51 @@
     "Open the Cloudflare for Startups application page.",
     "Submit the application and pick your funding level (under $5M or $5M and over).",
     "Wait for the confirmation email; Cloudflare says review takes up to 48 hours."
+   ]
+  },
+  {
+   "id": "databricks-for-startups",
+   "program": "Databricks for Startups",
+   "provider": "Databricks",
+   "bucket": "funded_or_partner",
+   "credit_first": null,
+   "credit_first_computed": false,
+   "credit_max": 200000,
+   "credit_max_computed": false,
+   "amount_note": "Up to $200K in credits across Databricks and Neon. The page says the amount depends on qualification and gives no split between the two.",
+   "covers": [
+    "cpu",
+    "inference"
+   ],
+   "requirements": [
+    "Early-stage, venture-backed startup",
+    "Databricks especially looks for founders who recently raised institutional funding (pre-seed through Series A) and build on data and AI",
+    "Apply on the program page, or ask your investor to nominate you if you are unsure you qualify",
+    "Databricks reviews each application and replies to the applicant"
+   ],
+   "max_age_years": null,
+   "funding_rule": "pre-Series B",
+   "term": null,
+   "traps": {
+    "card_required": null,
+    "expiry": null,
+    "overage": "unknown",
+    "trains_on_data": null,
+    "other": [
+     "The pages state no term, expiry or conditions on the credits.",
+     "The pages do not say how the credits split between Databricks and Neon.",
+     "The pages give no hard eligibility criteria, review timeline or country limits.",
+     "The pages do not say whether an investor nomination guarantees admission.",
+     "Pre-seed through Series A is the stated focus, not a stated limit."
+    ]
+   },
+   "link": "https://www.databricks.com/product/startups",
+   "source": "https://www.databricks.com/blog/announcing-new-databricks-startup-program",
+   "checked": "2026-11-24",
+   "apply_steps": [
+    "Open the Databricks for Startups page and choose Apply now.",
+    "Submit your application, even if you are unsure you qualify; Databricks reviews it and replies.",
+    "Or ask your investor to nominate you; Databricks names Andreessen Horowitz, Battery, General Catalyst, Insight Partners, Menlo Ventures and NEA."
    ]
   },
   {
