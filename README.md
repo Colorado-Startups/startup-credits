@@ -25,6 +25,7 @@ No Python? Read [the founder guide](guides/free-gpu-credits-for-founders.md), or
 | [`guides/`](guides/free-gpu-credits-for-founders.md) | The founder guide: which programs to apply for first, and how to avoid a surprise bill |
 | [`program/DESIGN.md`](program/DESIGN.md) | The design of the Colorado Startups Accelerator Program, a free, non-equity cohort (not running yet) |
 | `tools/` | The repository's text checks and its secret scan |
+| [`docs/SPEC.md`](docs/SPEC.md) | The spec: purpose, interfaces, status and what done means |
 
 ## The two buckets
 
