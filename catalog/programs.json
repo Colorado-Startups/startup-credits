@@ -1,7 +1,7 @@
 {
  "version": 1,
  "about": "Startup credit programs a founder can apply to. Each row was read on the provider's own page on its checked date, and link is where the application or sign-up starts. Programs change: read the source page before you apply. Edit this file by pull request; catalog/check.py guards it.",
- "checked": "2026-11-12",
+ "checked": "2026-11-27",
  "buckets": [
   "incorporated",
   "funded_or_partner"
@@ -237,6 +237,53 @@
     "Give expected usage over the next four months and what would prompt integration in 30 to 60 days.",
     "Submit and wait for the review email.",
     "Use the credits that arrive in your console after approval."
+   ]
+  },
+  {
+   "id": "autodesk-fusion-startups",
+   "program": "Autodesk Fusion for startups",
+   "provider": "Autodesk",
+   "bucket": "incorporated",
+   "credit_first": null,
+   "credit_first_computed": false,
+   "credit_max": null,
+   "credit_max_computed": false,
+   "amount_note": "A discounted license, not a credit: Autodesk Fusion for $150 per user for 3 years, for up to 10 users per startup. Autodesk calls its prices estimates and says your reseller sets the actual price.",
+   "covers": [
+    "other"
+   ],
+   "requirements": [
+    "A registered company, such as an LLC",
+    "A professional email domain and a valid company website",
+    "Venture, angel-backed or bootstrapped",
+    "No previous subscription to Autodesk Fusion",
+    "A focus on designing or manufacturing physical products",
+    "Not a nonprofit. Service providers, resellers, contract manufacturers, consultants, makerspaces and design agencies are also not eligible",
+    "Autodesk reviews each application and emails approved applicants a link to subscribe",
+    "Not offered to all companies or in all countries"
+   ],
+   "max_age_years": null,
+   "funding_rule": "none",
+   "term": "3 years",
+   "traps": {
+    "card_required": null,
+    "expiry": "Access lasts 3 years. The page does not say what happens after that.",
+    "overage": "unknown",
+    "trains_on_data": null,
+    "other": [
+     "You pay $150 per user for the 3 years. It is a paid license, not free credit.",
+     "A company that completes the program, or is removed from it, may not re-apply.",
+     "The page does not say whether a Fusion free trial counts as a previous subscription."
+    ]
+   },
+   "link": "https://www.autodesk.com/products/fusion-360/startups-form",
+   "source": "https://www.autodesk.com/products/fusion-360/startups",
+   "checked": "2026-11-27",
+   "apply_steps": [
+    "Confirm the company is registered, designs or makes physical products, and has never subscribed to Autodesk Fusion.",
+    "Apply on Autodesk's startup form with a company email domain and website.",
+    "Wait for Autodesk's review, which the page says takes 24 to 48 hours.",
+    "Subscribe through the emailed link at $150 per user for 3 years."
    ]
   },
   {
